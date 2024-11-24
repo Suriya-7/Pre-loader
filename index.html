@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Web Animation</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <!-- Preloader Section -->
+    <div id="preloader">
+        <img src="icon/loader.gif" alt="Loading..." />
+    </div>
+
+    <!-- Main Content -->
+    <div class="container">
+        <h1>Welcome to the Home Page</h1>
+    </div>
+
+    <!-- JavaScript -->
+    <script>
+        const loader = document.getElementById("preloader");
+        const container = document.querySelector(".container");
+
+        // Minimum duration for preloader (e.g., 1.5 seconds)
+        const minimumDuration = 1500;
+
+        // Record when the page starts loading
+        const startTime = Date.now();
+
+        // Event listener for when the page finishes loading
+        window.addEventListener("load", function () {
+            // Calculate the time elapsed since the page started loading
+            const elapsedTime = Date.now() - startTime;
+
+            // Wait until the minimum duration has passed
+            const remainingTime = Math.max(0, minimumDuration - elapsedTime);
+
+            setTimeout(function () {
+                // Add fade-out class to the preloader
+                loader.classList.add("fade-out");
+
+                // Wait for the fade-out animation to complete
+                loader.addEventListener("transitionend", function () {
+                    loader.style.display = "none"; // Completely hide the preloader
+                    container.style.display = "block"; // Show the main content
+                    container.classList.add("fade-in"); // Add fade-in animation to the container
+                });
+            }, remainingTime);
+        });
+    </script>
+</body>
+
+</html>
